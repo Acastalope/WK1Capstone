@@ -1,14 +1,11 @@
 package Week1CapstonePigLatin;
 
+
 import java.util.Scanner;
 
 public class Week1CapstonePigLatin {
 
 	public static void main(String[] args) {
-
-		String contin = "yes";
-
-		//while(contin.equalsIgnoreCase("yes")) { // run the program while the condition yes is true
 
 		Scanner sc = new Scanner(System.in); // scanner for user input
 
@@ -22,8 +19,11 @@ public class Week1CapstonePigLatin {
 
 			String word =sc.next();
 
-			System.out.println("Translation: " + solve(word)); 
-
+			if (word.length() >= 4) {
+				System.out.println("Translation: " + solve(word));
+			} else {
+				System.out.println("Please enter a longer word.");
+			}
 			System.out.println();
 			System.out.println("Want to translate another word into Pig Latin? Yes or No"); 
 			answer = sc.next();
@@ -33,27 +33,39 @@ public class Week1CapstonePigLatin {
 
 	}
 
-	public static String solve (String word) {
+	public static String solve (String temp) {
 
 
-		String temp = word.toLowerCase();
+		temp = temp.toLowerCase();
 		char[] vowels = {'a', 'e', 'i','o','u'};
 		char first = temp.charAt(0);
-
+		char second = temp.charAt(1);
+		char third = temp.charAt(2);
+		char fourth = temp.charAt(3);
 
 		for (int i = 0; i < vowels.length; i++) {
 			if (first == vowels[i]) {
-				return word +"way";
+				return temp +"way";
 
 			}
-
+			else if (second == vowels[i]) {
+				temp = temp.substring(1);
+				temp += first + "ay";		
+			}
+			else if (third == vowels[i]) {
+				temp = temp.substring(2);
+				temp += Character.toString(first) + Character.toString(second) + "ay";		
+			}
+			else if (fourth == vowels[i]) {
+				temp = temp.substring(3);
+				temp += Character.toString(first) + Character.toString(second) + Character.toString(third) + "ay";
+			}
 		}
 
 
-		word = word.substring(1);
-		word += first + "ay";
+		
 
-		return word;
+		return temp;
 
 	}
 
